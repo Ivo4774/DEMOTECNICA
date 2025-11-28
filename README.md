@@ -38,7 +38,7 @@ La solución se encuentra containerizada utilizando **Docker Compose** e integra
     docker compose ps
     ```
 
-## ⚙️ Endpoints y Credenciales
+##  Endpoints y Credenciales
 
 A continuación se detallan los accesos, puertos y credenciales por defecto configurados en el `docker-compose.yml`:
 
