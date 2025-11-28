@@ -61,9 +61,11 @@ Para probar el flujo de integración, enviar el siguiente mensaje **ADT^A01** al
 *(Importante: Respetar el salto de línea entre segmentos)*
 
 ```text
+
+
 MSH|^~\&|HIS|RIH|EKG|EKG|200202150930||ADT^A01|MSG00001|P|2.3
 PID|1||123456||PEREZ^JUAN
-### 2. Validaciones
+### 2. Validaciones respectivas
 
 #### A. Verificación en PostgreSQL
 Conectarse a la base de datos con las credenciales provistas y verificar que el mensaje crudo se haya insertado:
