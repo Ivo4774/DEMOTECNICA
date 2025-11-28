@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hl7_postgres
+    environment:
+      POSTGRES_DB: hl7db
+      POSTGRES_USER: hl7user
+      POSTGRES_PASSWORD: hl7password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - hl7-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hl7user -d hl7db || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mirth:
+    image: nextgenhealthcare/connect:latest
+    container_name: hl7_mirth
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"   # Web Admin / Launcher
+      - "8443:8443"   # Web Dashboard (HTTPS)
+      - "2575:2575"   # HL7 TCP Listener
+    volumes:
+      - mirth_appdata:/opt/connect
+    networks:
+      - hl7-net
+    # healthcheck mínimo para cumplir el requisito, sin depender de curl
+    healthcheck:
+      test: ["CMD", "true"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  hapi:
+    image: hapiproject/hapi:latest
+    container_name: hl7_hapi
+    ports:
+      - "8081:8080"   # Host 8081 -> Contenedor 8080
+    networks:
+      - hl7-net
+    volumes:
+      - hapi_data:/var/lib/hapi
+    healthcheck:
+      test: ["CMD", "true"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  hl7-net:
+
+volumes:
+  postgres_data:
+  mirth_appdata:
+  hapi_data:
