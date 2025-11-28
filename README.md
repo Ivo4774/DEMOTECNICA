@@ -5,13 +5,13 @@ Este repositorio contiene la solución a la prueba técnica para el perfil DevOp
 
 La solución se encuentra containerizada utilizando **Docker Compose** e integra los servicios de **Mirth Connect**, **PostgreSQL** y **HAPI FHIR Server**.
 
-## 📋 Contenido del Repositorio
+##  Contenido del Repositorio
 
 * **`docker-compose.yml`**: Definición de la infraestructura, redes y volúmenes.
 * **`init.sql`**: Script de inicialización de la base de datos (`hl7_raw_messages`).
 * **`HL7_POC.xml`**: Configuración exportada del canal de integración de Mirth Connect.
 
-## 🚀 Despliegue y Ejecución
+##  Despliegue y Ejecución
 
 ### Prerrequisitos
 * Docker Desktop (o Docker Engine + Compose) instalado y corriendo.
@@ -52,7 +52,7 @@ A continuación se detallan los accesos, puertos y credenciales por defecto conf
 * **Base de Datos de Negocio:** `hl7db`
 * **Tabla de persistencia:** `hl7_raw_messages`
 
-## 🧪 Ejecución y Prueba de Envío
+##  Ejecución y Prueba de Envío
 
 ### 1. Enviar Mensaje HL7
 Para probar el flujo de integración, enviar el siguiente mensaje **ADT^A01** al puerto TCP **6661**. Se puede realizar mediante la herramienta "Send Message" del Dashboard de Mirth o utilizando un cliente TCP (como Netcat).
